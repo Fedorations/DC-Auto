@@ -1,10 +1,7 @@
-import requests
-import time
-import sys
-from colorama import Fore, Style, init
-import json
+import requests, time, sys, os, json
+from pystyle import Colors, Colorate, Write
 
-ascii = '''
+banner = r'''
  __  __     __  __     _____     ______     ______    
 /\ \_\ \   /\ \_\ \   /\  __-.  /\  == \   /\  __ \   
 \ \  __ \  \ \____ \  \ \ \/\ \ \ \  __<   \ \  __ \  
@@ -12,29 +9,29 @@ ascii = '''
   \/_/\/_/   \/_____/   \/____/   \/_/ /_/   \/_/\/_/ 
                                                       
 '''
-print(f"{Fore.LIGHTBLUE_EX}{ascii}")
+with open(f"C:/Users/{os.getlogin()}/Desktop/DcSender/DcMain/config.json") as config_file:
+    configuration = json.load(config_file)
 
-tokendc = "" # user token 4 discord
-channel = input(f"{Fore.BLUE}Channel ID (>): ") 
+Token = configuration["discordToken"] 
+chid = configuration["channelId"] 
+Seconds = configuration["Time_Per_Message"] 
+msgs = configuration["Messages"] 
+#---------------------
 message = {
-    "content": '''
-straight rizz though ngl
-
-
-'''
+    "content": '''Hello!
+How Are You?'''
 }
+#-----------------------
+print(Colorate.Horizontal(Colors.blue_to_white, f"{banner}", 1))
 
 headers = {
-    "Authorization": tokendc,
+    "Authorization": Token,
     "Content-Type": "application/json"
 }
 
-for _ in range(999):
-    start_send = requests.post(f"https://discord.com/api/v9/channels/{channel}/messages", headers=headers, data=json.dumps(message))
-    time.sleep(7)
+for _ in range(msgs):
+    start_send = requests.post(f"https://discord.com/api/v9/channels/{chid}/messages", headers=headers, data=json.dumps(message))
+    time.sleep(Seconds)
     req_send = start_send.json()
     content_sent = req_send['content']
-    content_user = req_send['author']['username']
-    print(f"{content_sent}")
-    print(f"{content_user}")
-
+    print(content_sent + " || MSG Sent!")
