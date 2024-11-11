@@ -9,7 +9,7 @@ banner = r'''
   \/_/\/_/   \/_____/   \/____/   \/_/ /_/   \/_/\/_/ 
                                                       
 '''
-with open(f"C:/Users/{os.getlogin()}/Desktop/DcSender-main/DcMain/config.json") as config_file:
+with open(f"C:/Users/{os.getlogin()}/Desktop/DcSender-main/config.json") as config_file:
     configuration = json.load(config_file)
 
 Token = configuration["discordToken"] 
