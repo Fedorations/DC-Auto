@@ -27,8 +27,7 @@ Seconds = configuration.get("Time_Per_Message")
 msgs = configuration.get("Messages") 
 
 message = {
-    "content": '''Hello!
-How Are You?'''
+    "content": '''Lorem Ipsum!'''
 }
 
 print(Colorate.Horizontal(Colors.blue_to_white, banner, 1))
